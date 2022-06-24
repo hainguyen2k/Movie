@@ -1,27 +1,104 @@
-import { Box } from "@mui/material";
+import { ArrowBackIosNew } from "@mui/icons-material";
+import { Box, IconButton, Typography } from "@mui/material";
+
+import { Link, useLocation } from "react-router-dom";
 
 function Header() {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        height: "8rem",
-        width: "100%",
-        backgroundColor: "#050A30",
-      }}
-    >
+  const { pathname } = useLocation();
+  if (pathname === "/")
+    return (
       <Box
         sx={{
-          display: "block",
-          width: "100px",
-          height: "100px",
-          backgroundImage: "../src/assets",
+          display: "flex",
+          height: "80px",
+          width: "100%",
+          backgroundColor: "#050A30",
+          alignItems: "center",
+          top: 0,
+          position: "fixed",
+          zIndex: "1",
         }}
       >
-        {/* <img src="https://w7.pngwing.com/pngs/725/684/png-transparent-movie-time-graphic-film-cinema-logo-film-elements-cdr-food-text.png" /> */}
+        <Box
+          sx={{
+            position: "absolute",
+            left: "100px",
+          }}
+        >
+          <img
+            src="https://raw.githubusercontent.com/Isaac-alencar/moviebox/main/src/assets/logo.svg"
+            alt=""
+            style={{
+              display: "block",
+              width: "60px",
+              height: "60px",
+            }}
+          />
+        </Box>
+        <Link to={pathname.includes("favorite") ? "/" : "/favorite"}>
+          <Typography
+            component="p"
+            sx={{
+              position: "absolute",
+              color: "white",
+
+              right: "100px",
+              fontWeight: "bold",
+            }}
+          >
+            Favorites
+          </Typography>{" "}
+        </Link>
       </Box>
-    </Box>
-  );
+    );
+  else
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          height: "80px",
+          width: "100%",
+          backgroundColor: "#050A30",
+          alignItems: "center",
+          top: 0,
+          position: "fixed",
+          zIndex: "1",
+        }}
+      >
+        <Link to={pathname.includes("favorite") ? "/" : "/favorite"}>
+          <Box
+            sx={{
+              display: "block",
+              width: "60px",
+              height: "60px",
+              position: "absolute",
+              left: "100px",
+              color: "white",
+            }}
+          >
+            <IconButton component={Link} to="/">
+              <ArrowBackIosNew />
+            </IconButton>
+          </Box>
+        </Link>
+        <Box
+          sx={{
+            position: "absolute",
+            right: "100px",
+          }}
+        >
+          <img
+            src="https://raw.githubusercontent.com/Isaac-alencar/moviebox/main/src/assets/logo.svg"
+            alt=""
+            style={{
+              display: "block",
+              width: "60px",
+              height: "60px",
+            }}
+          />
+        </Box>
+      </Box>
+    );
 }
 
 export default Header;
